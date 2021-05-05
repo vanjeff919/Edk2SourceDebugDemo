@@ -31,7 +31,8 @@
   #
   DEFINE SECURE_BOOT_ENABLE      = FALSE
   DEFINE SMM_REQUIRE             = FALSE
-  DEFINE SOURCE_DEBUG_ENABLE     = FALSE
+  DEFINE DEBUG_ON_SERIAL_PORT    = TRUE
+  DEFINE SOURCE_DEBUG_ENABLE     = TRUE
   DEFINE TPM_ENABLE              = FALSE
   DEFINE TPM_CONFIG_ENABLE       = FALSE
 
@@ -80,6 +81,7 @@
   GCC:*_*_*_CC_FLAGS                   = -mno-mmx -mno-sse
 !endif
 !if $(SOURCE_DEBUG_ENABLE) == TRUE
+  MSFT:DEBUG_*_*_CC_FLAGS            = /D MDEPKG_NDEBUG /Od /Oy-
   MSFT:*_*_X64_GENFW_FLAGS  = --keepexceptiontable
   GCC:*_*_X64_GENFW_FLAGS   = --keepexceptiontable
   INTEL:*_*_X64_GENFW_FLAGS = --keepexceptiontable
@@ -802,6 +804,7 @@
       NULL|OvmfPkg/Csm/LegacyBootMaintUiLib/LegacyBootMaintUiLib.inf
 !endif
   }
+  MdeModulePkg/Application/HelloWorld/HelloWorld.inf
   OvmfPkg/QemuKernelLoaderFsDxe/QemuKernelLoaderFsDxe.inf
   OvmfPkg/VirtioPciDeviceDxe/VirtioPciDeviceDxe.inf
   OvmfPkg/Virtio10Dxe/Virtio10.inf
