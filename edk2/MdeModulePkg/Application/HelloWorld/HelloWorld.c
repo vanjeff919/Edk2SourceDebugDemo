@@ -42,6 +42,7 @@ UefiMain (
 {
   UINT32 Index;
 
+  CpuBreakpoint ();
   Index = 0;
 
   //
